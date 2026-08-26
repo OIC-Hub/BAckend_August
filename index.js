@@ -1,6 +1,6 @@
 // const fs = require('fs')
 const fs = require("fs/promises");
-
+const os = require("os")
 // fs.readFile("./class.txt", (err, data) => {
 //     if (err) throw err;
 //     console.log(data);
@@ -42,8 +42,8 @@ async function AppendDoc(){
     await fs.appendFile("./class.txt", ` ${name} -- ${today}`)
 }
 
+// ReadDoc();
+// WriteDoc();
+// AppendDoc();
 
-
-ReadDoc();
-WriteDoc();
-AppendDoc();
+console.log(os.platform())
