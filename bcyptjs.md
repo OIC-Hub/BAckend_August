@@ -14,7 +14,7 @@ Let's say a user signs up with the password `mypassword123`. If you save that di
 }
 ```
 
-Now imagine a hacker breaks into your database. They can see every user's password **in plain text** — and because most people reuse passwords, the hacker now has access to their email, bank, social media, everything.
+Now imagine a hacker breaks into your database. They can see every user's password **in plain text** — and because most people reuse passwords, the hacker now has access to their email, bank, social media, everything.b
 
 **This has happened to real companies.** LinkedIn leaked 6.5 million passwords in 2012. Adobe leaked 150 million in 2013. People lost access to accounts they never even knew were connected.
 
