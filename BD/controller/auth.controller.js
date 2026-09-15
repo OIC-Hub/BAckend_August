@@ -1,5 +1,8 @@
 const Auth = require("../models/Auth.model");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken")
+const dotenv = require("dotenv")
+dotenv.config();
 
 async function register(req, res) {
   try {
@@ -48,7 +51,11 @@ const authUser = await Auth.findOne({ email }).select("+password");
     return res.status(404).send("Invalid password");
   }
 
-  res.status(200).json({ message: "Login successfully" });
+  const secret = process.env.JWT_SECRET;
+  const userID = {id: authUser._id}
+  const token = jwt.sign(userID, secret, {expiresIn: "7d"})
+
+  res.status(200).json({ message: "Login successfully", token });
  } catch (error) {
     console.error(error)
  }
