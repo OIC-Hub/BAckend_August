@@ -61,4 +61,19 @@ const authUser = await Auth.findOne({ email }).select("+password");
  }
 }
 
-module.exports = {register, login};
+async function getProfile(req, res){
+  try {
+    const user = req.user._id
+  const findProfile = await Auth.findById(user).select("-password");
+
+  if(!findProfile){
+    return res.status(403).send("Unauthorized Sign In please")
+  }
+
+  res.status(200).json({message: "user fetched successfully", findProfile})
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+module.exports = {register, login, getProfile};
