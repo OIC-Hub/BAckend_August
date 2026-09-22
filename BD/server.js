@@ -5,11 +5,16 @@ const productRoute = require("./routes/product.route")
 const AuthRoute = require('./routes/auth.route')
 const connectDB = require("./config/db")
 const morgan = require("morgan")
+const helmet = require("helmet");
+const cors = require("cors")
 
 dotenv.config();
 const PORT = process.env.PORT;
 
 const app = express();
+
+app.use(cors());
+app.use(helmet());
 
 app.use(express.json())
 app.use(morgan("dev"))
