@@ -1,6 +1,8 @@
 const Auth = require("../models/Auth.model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken")
+const sendEmail = require("../services/mail")
+
 const dotenv = require("dotenv")
 dotenv.config();
 
@@ -22,7 +24,13 @@ async function register(req, res) {
 
     newUser.save();
 
+    sendEmail({
+      to: email,
+      subject: "New Account created",
+      html: "<h1>Welcome to my platform </h1>"
+    })
     res.status(201).json({ message: "user registered successfully" });
+
   } catch (error) {
     console.error(error);
   }
@@ -55,6 +63,11 @@ const authUser = await Auth.findOne({ email }).select("+password");
   const userID = {id: authUser._id}
   const token = jwt.sign(userID, secret, {expiresIn: "7d"})
 
+    sendEmail({
+      to: email,
+      subject: "Login Notification",
+      html: "<h1>Welcome back </h1>"
+    })
   res.status(200).json({ message: "Login successfully", token });
  } catch (error) {
     console.error(error)
